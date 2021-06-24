@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prefix: MyString
+  word: MyString
+  definition: MyText
+  phonetic: MyString
+  syllables: MyString
+  slug: MyString
+  also_matches: MyString
+
+two:
+  prefix: MyString
+  word: MyString
+  definition: MyText
+  phonetic: MyString
+  syllables: MyString
+  slug: MyString
+  also_matches: MyString

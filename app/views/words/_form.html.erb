@@ -1,0 +1,56 @@
+<%= form_with(model: word, remote: true) do |form| %>
+  <% if word.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(word.errors.count, "error") %> prohibited this word from being saved:</h2>
+
+      <ul>
+        <% word.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :prefix %>
+    <%= form.text_field :prefix %>
+  </div>
+
+  <div class="field">
+    <%= form.label :word %>
+    <%= form.text_field :word %>
+  </div>
+
+  <div class="field">
+    <%= form.label :definition %>
+    <%= form.rich_text_area :definition %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phonetic %>
+    <%= form.text_field :phonetic %>
+  </div>
+
+  <div class="field">
+    <%= form.label :syllables %>
+    <%= form.text_field :syllables %>
+  </div>
+
+  <div class="field">
+    <%= form.label :audio %>
+    <%= form.file_field :audio %>
+  </div>
+  <div class="field">
+    <%= form.label :slug %>
+    <%= form.text_field :slug %>
+  </div>
+
+  <div class="field">
+    <%= form.label :also_matches %>
+    <%= form.text_field :also_matches %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

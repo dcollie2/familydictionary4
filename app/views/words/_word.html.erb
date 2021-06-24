@@ -1,0 +1,7 @@
+  <div id="<%= dom_id(word) %>">
+    <h2><%= word.prefix %> <%= word.word %></h2>
+    <p><%= word.definition %></p>
+    <p><%= word.phonetic %></p>
+    <p><%= word.syllables %></p>
+    <p><%= link_to 'Edit', [:edit, word] %> | <%= link_to 'Destroy', word, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  </div>
