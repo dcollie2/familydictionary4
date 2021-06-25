@@ -26,7 +26,7 @@ class WordsController < ApplicationController
 
     respond_to do |format|
       if @word.save
-        format.html { redirect_to words_url, notice: "Word was successfully created." }
+        format.html { redirect_to word_url(@word), notice: "Word was successfully created." }
         format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class WordsController < ApplicationController
   def update
     respond_to do |format|
       if @word.update(word_params)
-        format.html { redirect_to words_url, notice: "Word was successfully updated." }
+        format.html { redirect_to word_url(@word), notice: "Word was successfully updated." }
         format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
