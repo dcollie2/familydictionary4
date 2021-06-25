@@ -13,5 +13,7 @@ ActiveStorage.start()
 require("jquery")
 require("trix")
 require("@rails/actiontext")
+import "bootstrap"
+import "../stylesheets/application"
 import "controllers"
 import "channels"
