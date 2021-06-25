@@ -17,4 +17,16 @@ class Word < ApplicationRecord
       "#{prefix} #{word}"
     end
   end
+
+  def next_by_date
+    Word.where(["created_at > ? and id != ?", self.created_at, self.id]).limit(1).order(:created_at).first
+  end
+  def prior_by_date
+    Word.where(["created_at < ? and id != ?", self.created_at, self.id]).limit(1).order("created_at DESC").first
+  end
+  def others
+    Word.find(:all, :conditions => ["id != ?", id]).collect { |i| i.word }
+  end
+
+
 end
