@@ -1,0 +1,370 @@
+
+
+// OLD and UNCONFIRMED
+
+// functions
+@function cp($target, $container) {
+  @return percentage($target / $container);
+}
+
+// Variables
+// Instead, find the bootstrap setting
+$link-color: #2795B6;
+
+
+
+.wordNav {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  margin: 0 0 .5em 0;
+  .leftWord, .map, .rightWord { 
+    margin: 0;
+    width: 33%; 
+    float: left;
+  };
+  .leftWord {
+  }
+  .map {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .rightWord {
+    text-align: right;
+  }
+}
+
+// Typography
+@font-face {
+    font-family: 'FultonMarkersLight';
+    src: url(font-path('FultonMarkersLight.otf'));
+}
+
+@font-face {
+    font-family: 'FultonMarkersSymbols';
+    src: url(font-path('FultonMarkersSymbols.otf'));
+}
+
+@font-face {
+    font-family: 'GoudyBookletter';
+    src: url(font-path('goudy_bookletter_1911-webfont.eot'));
+    src: url(font-path('goudy_bookletter_1911-webfont.otf') + '?#iefix') format('embedded-opentype'),
+         url(font-path('goudy_bookletter_1911-webfont.woff')) format('woff'),
+         url(font-path('goudy_bookletter_1911-webfont.ttf')) format('truetype'),
+         url(font-path('goudy_bookletter_1911-webfont.svg')) format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "GoudyBookletter", "Goudy", serif;
+  //font-weight: bold;
+  //text-rendering: optimizeLegibility;
+  //line-height: 1.1;
+  //margin-bottom: 14px;
+  //margin-top: 14px;
+}
+
+//h1 {
+//  font-size: 1.5em;
+//  font-weight: bold;
+//}
+
+
+#subtitle {
+  font-family: "FultonMarkersLight";
+}
+
+// Map
+path.link {
+    fill: none;
+    stroke: #E8E8E8;
+    stroke-width: 1.5px;
+  }
+
+circle {
+    fill: #ccc;
+    stroke: #fff;
+    stroke-width: 1.5px;
+  }
+
+text {
+    fill: #000;
+    font-weight: bold;
+    font: 14px sans-serif;
+    pointer-events: none;
+  }
+
+
+
+//Navigations -- Site
+#siteNav li {
+ list-style: none;
+ padding: 5px 0 5px 10px;
+}
+
+#siteNav li.last {
+ border-bottom: none;
+}
+
+#siteNav li {
+ border-bottom: 1px solid #ED9F9F;
+ &:hover { background-color: #999999; color: #FFFFFF; }
+}
+
+#siteNav a {
+  text-decoration: none;
+  span {
+    padding-left: 10px;
+    padding-top: 10px;
+    font-family: GoudyBookletter;
+    font-size: 18px;
+    color: black;
+  }
+}
+
+// Navigations -- Letters
+#letterNav {	
+ padding-left: cp(20, 331);
+  a {
+    span {
+      font-family: "FultonMarkersLight";
+    }
+	
+  }
+}
+
+#letterNav li, #letterNav li span {
+	font-size: 24px;
+	padding: 0.15em
+}
+#letterNav li, #letterNav li a:link, #letterNav li a:visited {
+ display: inline;
+ color: #000000;
+ text-decoration: none;
+}
+#letterNav li:hover {
+ background-color: #999999;
+}
+#letterNav li a:hover {
+ color: #FFFFFF;
+}
+
+// Navigations -- Word
+
+a.pointer {
+  text-decoration: none;
+}
+
+a.pointer em {
+  font-family: "FultonMarkersSymbols";
+  font-size: 24px;
+}
+
+a.pointer span.word-nav-label {
+  font-size: 18px;
+  padding: 0 5px 0 5px;
+}
+
+.letter-header {
+  border-bottom: 1px dotted black;
+}
+
+// Page
+.container .contents {
+  padding: 20px percentage(24px / 650px);
+  p {
+    padding: 0 0 1em 0;
+     a {
+      color: $link-color;
+      text-decoration: none;    
+    }
+  }
+  dl a {
+    color: $link-color;
+    text-decoration: none;    
+  }
+  
+  ul {
+    list-style: disc;
+    margin-bottom: 1em;
+    li {
+      display: list-item;
+      margin: 0 0 .25em 2em;
+       a {
+        color: $link-color;
+        text-decoration: none;    
+      }
+    }
+  }
+}
+
+// Word
+.container article {
+  padding: 20px percentage(24px / 650px);
+  h1 {
+    font-size: 1.5em; /* 24px / 16px */
+    font-weight: bold;
+  	//border-bottom: 1px dotted black;
+  	a {
+  		color: black;
+  	}
+  }
+  p {
+    padding-left: percentage(24px / 650px);    
+  }
+  a {
+    color: $link-color;
+    text-decoration: none;
+  }
+  aside {
+    h1 {
+      font: normal 100% Baskerville, “Times New Roman”, Times, serif;
+    }
+    p {
+      padding-left: 0;
+    }
+    .phonetic {
+    	font-size: 24px;
+    }
+//    border-left: 1px dotted black;
+  	border-top: 1px dotted black;
+  //	margin: 50px 0 0px 40px;
+    padding: 20px percentage(24px / 650px);
+  }
+}
+
+
+div.word-map {
+  margin-top: 1em;
+  border: 5px groove grey;
+  width: 370px;
+  float: right;
+}
+div#images {
+  margin-top: 1em;
+  width: 50%;
+}
+
+div#pronounce {
+	margin-top: 30px;
+}
+
+audio {
+  width: 100%;
+	background: gray;
+	opacity: 0.25;
+}
+
+// Photos
+ul#cbox {
+  list-style: none;
+}
+ul#cbox li {
+  display: inline;
+  margin-left: .25em;
+  margin-bottom: .25em;
+}
+
+// Reference List
+ul#reference-list {
+  li {
+    display: inline;    
+    width: auto;
+  }
+}
+
+// Contributions
+#instructions {
+  list-style: bullet;
+}
+
+strong {
+  font-weight: bold;
+}
+
+section#vocabulary {
+  ul {
+    height: 200px;
+    overflow: auto;
+    li {
+      display: inline;
+      width: auto;
+      margin: 0 .25em 0 0;
+      transition: font-size 1s;
+      -moz-transition: font-size 1s;
+      -webkit-transition: font-size 1s;
+      -o-transition: font-size 1s;
+    }
+    li:hover {
+      font-size: 1.25em;
+      font-weight: bold;
+    }
+  }
+}
+
+
+#definition {
+  ul {
+    :first-child:after {
+      content: ":";
+    }
+    :last-child:after {
+      content: ".";
+    }
+    :nth-child(2) {
+      text-transform: capitalize;
+    }
+//    border: 1px solid black;
+    padding: 1em;
+    :first-child {
+      color: blue; 
+      text-transform: capitalize;
+    }
+    li {
+      display: inline;
+      width: auto;
+      margin: 0 .25em 0 0;
+    }    
+  }
+}
+
+#your-poem-title {
+  ul {
+    padding: 1em;
+    text-transform: capitalize;
+    font-weight: bold;
+    li {
+      display: inline;
+      width: auto;
+      margin: 0 .25em 0 0;
+    }    
+  }
+}
+#your-poem-text {
+  p {
+    padding-left: 1em;
+  }
+}
+
+// Quiz format
+ol.quiz {
+  list-style-type: decimal;
+  margin: 30px 0 0 25px;
+  li {
+    font-weight: bold;
+  }
+  ol {
+    list-style-type: lower-alpha; margin: 5px 0 20px 25px;
+    li {
+      font-weight: normal;
+      margin: 10px;
+    }
+  }
+}
+
+.idioglossia .definition {
+  display: block;
+}
+
