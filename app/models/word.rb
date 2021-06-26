@@ -58,6 +58,22 @@ class Word < ApplicationRecord
     match = match + also_matches.split(" ") unless also_matches.blank?
     match
   end
+  
+  # NEW STUFF
+  # Get a definition's unique words
+  def unique_words
+    WordsCounted::Tokeniser.new(ActionController::Base.helpers.strip_tags(definition.to_plain_text)).tokenise.uniq
+  end
+
+  scope :other_defined_words, ->(id) { where.not(id: id).pluck(:word) }
+
+  def defined_words_downcased
+    Word.other_defined_words(id).map!(&:downcase)
+  end
+
+  def matched_words
+    unique_words.intersection(defined_words_downcased)
+  end
 
   def check_links
     # Clear all existing links to defined words
@@ -76,29 +92,4 @@ class Word < ApplicationRecord
     # Ok. Now do all the other words
     # Word.all.each { |word| word.save! }
   end
-
-  def matches?(term, definition)
-    Word.find_words(definition).include?(term.downcase)
-  end
-
-  def self.find_words(definition)
-    WordsCounted::Tokeniser.new(ActionController::Base.helpers.strip_tags(definition)).tokenise.uniq
-  end
-
-  # NEW STUFF
-  # Get a definition's unique words
-  def unique_words
-    WordsCounted::Tokeniser.new(ActionController::Base.helpers.strip_tags(definition.to_plain_text)).tokenise.uniq
-  end
-
-  scope :other_defined_words, ->(id) { where.not(id: id).pluck(:word) }
-
-  def defined_words_downcased
-    Word.other_defined_words(id).map!(&:downcase)
-  end
-
-  def matched_words
-    unique_words.intersection(defined_words_downcased)
-  end
-
 end
