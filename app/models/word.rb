@@ -58,17 +58,24 @@ class Word < ApplicationRecord
     match = match + also_matches.split(" ") unless also_matches.blank?
     match
   end
-  
+
   # NEW STUFF
   # Get a definition's unique words
   def unique_words
     WordsCounted::Tokeniser.new(ActionController::Base.helpers.strip_tags(definition.to_plain_text)).tokenise.uniq
   end
 
-  scope :other_defined_words, ->(id) { where.not(id: id).pluck(:word) }
+  scope :other_defined_words, ->(id) { where.not(id: id) }
+  scope :with_also_matches, -> { where.not(also_matches: [nil,'']) }
 
-  def defined_words_downcased
-    Word.other_defined_words(id).map!(&:downcase)
+  def other_words_downcased
+    result = Word.other_defined_words(id).pluck(:name)
+    result.map!(&:downcase).join(' ') if result.present?
+  end
+
+  def also_match_words
+    result = Word.other_defined_words(id).with_also_matches&.pluck(:also_matches)
+    result.map!(&:downcase) if result.present?
   end
 
   def matched_words
@@ -77,10 +84,9 @@ class Word < ApplicationRecord
 
   def check_links
     # Clear all existing links to defined words
-    # Create new links based on current definition
     # Save @word with links set in linked_definition
     child_citations.destroy_all
-    matched_words.each do |word|
+    other_words_downcased.each do |word|
       logger.debug("Citation: #{id} to #{word}")
       matched_word = Word.friendly.find(word)
       # Find or create probably redundant since we're going by distinct list of matches
