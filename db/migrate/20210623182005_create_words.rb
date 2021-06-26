@@ -7,7 +7,7 @@ class CreateWords < ActiveRecord::Migration[6.1]
       t.string :phonetic
       t.string :syllables
       t.string :slug
-      t.string :also_matches
+      t.text :also_matches, array: true, default: []
 
       t.timestamps
     end

@@ -1,5 +1,5 @@
 class Word < ApplicationRecord
-  has_rich_text :definition
+  # has_rich_text :definition
   has_one_attached :audio
 
   has_many :child_citations, :class_name => "Citation", :foreign_key => :source_id, :dependent => :destroy
@@ -9,7 +9,7 @@ class Word < ApplicationRecord
   has_many :defining_words, :through => :parent_citations
 
   after_create :check_links
-  after_update :check_links #, if: :definition_changed?
+  after_update :check_links, if: :definition_changed?
 
   after_create_commit {broadcast_prepend_to "words"}
   after_update_commit {broadcast_replace_to "words"}
@@ -69,8 +69,8 @@ class Word < ApplicationRecord
   scope :with_also_matches, -> { where.not(also_matches: [nil,'']) }
 
   def other_words_downcased
-    result = Word.other_defined_words(id).pluck(:name)
-    result.map!(&:downcase).join(' ') if result.present?
+    result = Word.other_defined_words(id).pluck(:word)
+    result.map!(&:downcase) if result.present?
   end
 
   def also_match_words
@@ -86,13 +86,15 @@ class Word < ApplicationRecord
     # Clear all existing links to defined words
     # Save @word with links set in linked_definition
     child_citations.destroy_all
-    other_words_downcased.each do |word|
-      logger.debug("Citation: #{id} to #{word}")
-      matched_word = Word.friendly.find(word)
-      # Find or create probably redundant since we're going by distinct list of matches
-      if matched_word.present?
-        # else case could catch also_match once we incorporate those in matched_words
-        child_citations.find_or_create_by!(:destination_id => matched_word.id)
+    if other_words_downcased.present?
+      other_words_downcased.each do |word|
+        logger.debug("Citation: #{id} to #{word}")
+        matched_word = Word.friendly.find(word)
+        # Find or create probably redundant since we're going by distinct list of matches
+        if matched_word.present?
+          # else case could catch also_match once we incorporate those in matched_words
+          child_citations.find_or_create_by!(:destination_id => matched_word.id)
+        end
       end
     end
     # Ok. Now do all the other words
