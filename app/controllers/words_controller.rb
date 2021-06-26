@@ -7,6 +7,11 @@ class WordsController < ApplicationController
     @word = Word.new
   end
 
+  def current
+    @word = Word.current
+    render :show
+  end
+
   # GET /words/1 or /words/1.json
   def show
   end
@@ -61,7 +66,7 @@ class WordsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_word
-      @word = Word.find(params[:id])
+      @word = Word.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
