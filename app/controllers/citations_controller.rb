@@ -4,7 +4,7 @@ class CitationsController < ApplicationController
     
     unless params[:word].nil?
       @word = Word.friendly.find(params[:word])
-      @citations = Citation.where("source_id = ? or destination_id = ?", @word.id, @word.id)
+      @citations = Citation.for_word(@word.id)
     else
       @citations = Citation.all
     end

@@ -4,7 +4,7 @@
 <article class="word">
   <div class="definition">
     <h1><%= "#{@word.prefix} " unless @word.prefix.blank? %><%=h @word.word %></h1>
-    <%#= linkTerms(@word.definition.to_plain_text) %>
+    <%#= linkTerms(@word.definition) %>
     <%= @word.definition %>
   </div>
   <% if current_user %><p><%= link_to "Edit", edit_word_path(@word) %> <%= link_to "Destroy", @word, :method => :delete, :data => { :confirm => 'Are you sure?' } %></p><% end %>

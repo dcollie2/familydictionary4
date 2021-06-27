@@ -9,14 +9,19 @@ class Word < ApplicationRecord
   has_many :defining_words, :through => :parent_citations
 
   after_create :check_links
-  after_update :check_links, if: :definition_changed?
+  # Restore conditions after import is complete
+  after_update :check_links #, if: :definition_changed?
 
   after_create_commit {broadcast_prepend_to "words"}
   after_update_commit {broadcast_replace_to "words"}
   after_destroy_commit {broadcast_remove_to "words"}
 
+  def word_for_slug
+    word.downcase
+  end
+
   extend FriendlyId
-  friendly_id :word, use: :slugged
+  friendly_id :word_for_slug, use: :slugged
 
   scope :by_created_at, -> { order(:created_at) }
   scope :current, -> { by_created_at.last }
@@ -62,7 +67,7 @@ class Word < ApplicationRecord
   # NEW STUFF
   # Get a definition's unique words
   def unique_words
-    WordsCounted::Tokeniser.new(ActionController::Base.helpers.strip_tags(definition.to_plain_text)).tokenise.uniq
+    WordsCounted::Tokeniser.new(ActionController::Base.helpers.strip_tags(definition)).tokenise.uniq
   end
 
   scope :other_defined_words, ->(id) { where.not(id: id) }
@@ -70,32 +75,45 @@ class Word < ApplicationRecord
 
   def other_words_downcased
     result = Word.other_defined_words(id).pluck(:word)
-    result.map!(&:downcase) if result.present?
+    if result.present?
+      result.map!(&:downcase)
+    else
+      []
+    end
   end
 
   def also_match_words
-    result = Word.other_defined_words(id).with_also_matches&.pluck(:also_matches)
-    result.map!(&:downcase) if result.present?
+    result = Word.other_defined_words(id).with_also_matches&.pluck(:also_matches).flatten
   end
 
   def matched_words
-    unique_words.intersection(defined_words_downcased)
+    unique_words.intersection(other_words_downcased.concat(also_match_words))
   end
 
   def check_links
     # Clear all existing links to defined words
     # Save @word with links set in linked_definition
     child_citations.destroy_all
-    if other_words_downcased.present?
-      other_words_downcased.each do |word|
-        logger.debug("Citation: #{id} to #{word}")
-        matched_word = Word.friendly.find(word)
-        # Find or create probably redundant since we're going by distinct list of matches
-        if matched_word.present?
-          # else case could catch also_match once we incorporate those in matched_words
+    if matched_words.present?
+      puts "-------"
+      puts "#{word}: #{matched_words}"
+      matched_words.each do |match|
+        puts "Citation: #{id} to #{match}"
+        matched_word = Word.where(slug: match).first
+        if matched_word.blank?
+          matched_word = Word.where(":words = ANY (also_matches)", words: match).first
+          puts("ALT MATCH on #{word}!!!") if matched_word.present?
+        end
+        unless matched_word.blank?
+          # find or create because also_matches can contain duplicates
           child_citations.find_or_create_by!(:destination_id => matched_word.id)
+          puts "Matching #{word} to #{matched_word.word}"
+        else
+          puts "NO MATCH FOUND!"
         end
       end
+    else
+      puts "#{word} has no matched words. #{matched_words} - #{definition}-------"
     end
     # Ok. Now do all the other words
     # Word.all.each { |word| word.save! }
