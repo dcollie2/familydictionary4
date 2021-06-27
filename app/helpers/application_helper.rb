@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def description(description = "An Abbreviated Family Dictionary")
-    @description = strip_tags(description.to_plain_text)
+    @description = strip_tags(description)
   end
 
   def show_title?
