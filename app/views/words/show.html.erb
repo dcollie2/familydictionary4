@@ -7,7 +7,7 @@
     <%#= linkTerms(@word.definition) %>
     <%= @word.definition %>
   </div>
-  <% if current_user %><p><%= link_to "Edit", edit_word_path(@word) %> <%= link_to "Destroy", @word, :method => :delete, :data => { :confirm => 'Are you sure?' } %></p><% end %>
+  <% if user_signed_in? %><p><%= link_to "Edit", edit_word_path(@word) %> <%= link_to "Destroy", @word, :method => :delete, :data => { :confirm => 'Are you sure?' } %></p><% end %>
   <div class="wordNav">
     <div class="leftWord">
       <%= link_to "<em>&lt;</em><span class='word-nav-label'>#{@word.prior_by_date.full_word}</span>".html_safe, word_url(@word.prior_by_date), :class => "pointer left" if @word.prior_by_date.present? %>
