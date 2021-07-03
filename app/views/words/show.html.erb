@@ -89,7 +89,7 @@
                     nodes = Object.create(null);
                     nodes = Object.create(nodes, {
                     <%= escape_javascript(@word.slug) %>: {
-                        'index': 1,
+                        'index: 1,
                         'name': '<%= @word.word %>'
                     }
                 });

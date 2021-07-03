@@ -1,5 +1,5 @@
   <div id="<%= dom_id(word) %>">
     <h4><%= link_to word.full_word, word, data: { turbo: "false" } %></h4>
     <%= word.definition %>
-    <% if current_user %><p><%= link_to 'Edit', [:edit, word], data: { turbo: "false" } %> <%= link_to 'Destroy', word, method: :delete, data: { confirm: 'Are you sure?' } %></p><% end %>
+    <% if user_signed_in? %><p><%= link_to 'Edit', [:edit, word], data: { turbo: "false" } %> <%= link_to 'Destroy', word, method: :delete, data: { confirm: 'Are you sure?' } %></p><% end %>
   </div>
