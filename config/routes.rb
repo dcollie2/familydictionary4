@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
+
   resources :words do
     get :current, on: :member
   end
+
+  mount ActionCable.server => "/cable"
 
   resources :citations
 

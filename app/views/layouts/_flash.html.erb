@@ -1,0 +1,6 @@
+<% flash.each do |type, message| %>
+  <% if type == "notice" %>
+    <%= message %>
+  <% end %>
+<% end %>
+<%# https://dev.to/andersklenke/flash-messages-with-hotwire-3egd %>
