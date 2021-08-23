@@ -18,4 +18,32 @@ namespace :import do
     end
   end
 
+  task :audio => :environment do
+
+    CSV.foreach("docs/tmp_migration/words_export.csv", :headers => true, liberal_parsing: {double_quote_outside_quote: true}) do |row|
+      puts "#{row['word']} - #{row['audio_file_name']}"
+      unless row['audio_file_name'].blank?
+        # find the word
+        word = Word.friendly.find(row['word'].downcase)
+        if word.blank?
+          puts "WORD NOT FOUND------#{row['word']}"
+        else
+          begin
+            src =  "https://s3.amazonaws.com/familydictionary2.net/original/#{row['audio_file_name']}"
+            word.audio.purge
+            word.audio.attach(io: URI.open(src), filename: row['audio_file_name'], content_type: row['audio_content_type'])
+          rescue => e
+            puts "------ERROR GETTING #{row['word']}"
+          end
+        end
+      else
+        puts 'No audio'
+      end
+    end
+  end
+
+  task :reset => :environment do
+    Word.destroy_all
+  end
+
 end

@@ -13,39 +13,45 @@
       <%= link_to "<em>&lt;</em><span class='word-nav-label'>#{@word.prior_by_date.full_word}</span>".html_safe, word_url(@word.prior_by_date), :class => "pointer left" if @word.prior_by_date.present? %>
     </div>
     <div class="map">
-      <a href="#" class="button" id="mapModalButton">Map</a>
+      <button class="btn btn-primary" id="mapModalButton" data-bs-toggle="modal" data-bs-target="#mapModal">Map</button>
     </div>
     <div class="rightWord">
       <%= link_to "<span class='word-nav-label'>#{@word.next_by_date.full_word}</span><em>&gt;</em>".html_safe, word_path(@word.next_by_date), :class => "pointer right" if @word.next_by_date.present? %>
     </div>
   </div>
-  <% content_for :modal do %>
-    <div id="mapModal" class="reveal-modal expand">
-      <div class="six columns">
-        <% if @word.defined_elsewhere? %>
-          <h5><%= @word.word %> gets a card from
-            <% @word.defining_words.each do |word| %>
-              &nbsp;<%= link_to word.word.downcase, word_path(word) %>
+    <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="wordMap" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="wordMapModal">Word Map</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <% if @word.defined_elsewhere? %>
+              <h5><%= @word.word %> gets a card from
+                <% @word.defining_words.each do |word| %>
+                  &nbsp;<%= link_to word.word.downcase, word_path(word) %>
+                <% end %>
+              </h5>
+            <% else %>
+              <h5>The phone never rings for <%= @word.word %></h5>
             <% end %>
-          </h5>
-        <% else %>
-          <h5>The phone never rings for <%= @word.word %></h5>
-        <% end %>
+            <% if @word.has_defined_words? %>
+              <h5><%= @word.word %> contemplates
+                <% @word.defined_words.each do |word| -%>
+                  &nbsp;<%= link_to word.word.downcase, word_path(word) -%>
+                <% end -%>
+              </h5>
+            <% else %>
+              <h5><%= @word.word %> sulks in its room</h5>
+            <% end %>
+
+          </div>
+        </div>
       </div>
-      <div class="six columns">
-        <% if @word.has_defined_words? %>
-          <h5><%= @word.word %> contemplates
-            <% @word.defined_words.each do |word| -%>
-              &nbsp;<%= link_to word.word.downcase, word_path(word) -%>
-            <% end -%>
-          </h5>
-        <% else %>
-          <h5><%= @word.word %> sulks in its room</h5>
-        <% end %>
-      </div>
-      <a class="close-reveal-modal">&#215;</a>
     </div>
-  <% end %>
 
 
   <aside>
@@ -54,7 +60,7 @@
       &nbsp;
       <%= @word.syllables unless @word.syllables.blank? %>
     </p>
-    <%#= render :partial => 'audio', :object => @word.audio if @word.audio.exists? %>
+    <%= audio_tag url_for(@word.audio), controls: true, preload: "none" if @word.audio.present? %>
     <ul id="reference-list">
       <li>See also:</li>
       <li><a href="http://www.onelook.com/?w=<%= @word.word %>&amp;ls=b" target="_blank">Onelook</a></li>

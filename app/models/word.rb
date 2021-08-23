@@ -12,9 +12,10 @@ class Word < ApplicationRecord
   # Restore conditions after import is complete
   after_update :check_links #, if: :definition_changed?
 
-  after_create_commit {broadcast_prepend_to "words"}
-  after_update_commit {broadcast_replace_to "words"}
-  after_destroy_commit {broadcast_remove_to "words"}
+  # TODO: Restore after launch; kills data import
+  # after_create_commit {broadcast_prepend_to "words"}
+  # after_update_commit {broadcast_replace_to "words"}
+  # after_destroy_commit {broadcast_remove_to "words"}
 
   def word_for_slug
     word.downcase
@@ -95,10 +96,7 @@ class Word < ApplicationRecord
     # Save @word with links set in linked_definition
     child_citations.destroy_all
     if matched_words.present?
-      puts "-------"
-      puts "#{word}: #{matched_words}"
       matched_words.each do |match|
-        puts "Citation: #{id} to #{match}"
         matched_word = Word.where(slug: match).first
         if matched_word.blank?
           matched_word = Word.where(":words = ANY (also_matches)", words: match).first
@@ -107,13 +105,8 @@ class Word < ApplicationRecord
         unless matched_word.blank?
           # find or create because also_matches can contain duplicates
           child_citations.find_or_create_by!(:destination_id => matched_word.id)
-          puts "Matching #{word} to #{matched_word.word}"
-        else
-          puts "NO MATCH FOUND!"
         end
       end
-    else
-      puts "#{word} has no matched words. #{matched_words} - #{definition}-------"
     end
     # Ok. Now do all the other words
     # Word.all.each { |word| word.save! }
