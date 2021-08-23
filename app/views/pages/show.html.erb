@@ -1,0 +1,48 @@
+<%= @page.contents %>
+
+<% if %w[map advice poetrymonth manuscript].include?(@page.permalink) %>
+  <%= render :partial => @page.permalink %>
+<% elsif @page.permalink == 'statistics' %>
+  <% defined_words = Word.all %>
+  <% definitions = "" %>
+  <% definitions = defined_words.map { |word| clean_up(word.definition) } %>
+  <% definitions = definitions.join(" ") %>
+  <% definition_words = find_words(definitions) %>
+  <h2>Defined Words</h2>
+  <ul>
+    <% defined_words.each do |word| %>
+      <li>
+        <% if definition_words.include?(word.word.downcase) %>
+          <strong><%= word.word %></strong>
+        <% else %>
+          <%= word.word %>
+        <% end %>
+        <% if !word.also_matches.blank? %>
+          <ul>
+            <% word.also_matches.split(' ').each do |item| %>
+              <li>
+                <% if definition_words.include?(item.downcase) %>
+                  <strong><%= item %></strong>
+                <% else %>
+                  <%= item %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </li>
+    <% end %>
+    </li>
+    <h2>Definition Words</h2>
+    <table id="word-table" class="tablesorter">
+      <thead>
+      <tr>
+        <th>Frequency</th>
+        <th>Word</th>
+      </tr>
+      </thead>
+      <tbody>
+      <%= word_frequency %>
+      </tbody>
+    </table>
+<% end %>

@@ -31,9 +31,11 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Current Word</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
+          <% Page.all.each do |page| %>
+            <li class="nav-item">
+              <a class="nav-link" href="/<%= page.permalink %>"><%= page.title %></a>
+            </li>
+          <% end %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="/words" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Idioglossia</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown04">

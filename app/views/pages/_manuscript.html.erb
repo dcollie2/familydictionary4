@@ -1,0 +1,14 @@
+<% @words = Word.all.order(:word) %>
+
+<% @words.group_by(&:first_letter).sort.each do |letter,words| %>
+    <h3><a name="<%= letter %>"><%= letter %></a></h3>
+    <dl class="idioglossia">
+      <% words.each do |word| %>
+          <dt><%= link_to word.full_word, word %> <%= "(#{word.phonetic.html_safe})" if word.phonetic.present? %></dt>
+          <dd>
+            <%= image_tag word.illustration.url(:medium), class: "illustration" if word.illustration.present? %>
+            <%= word.definition.html_safe %>
+          </dd>
+      <% end %>
+    </dl>
+<% end %>
