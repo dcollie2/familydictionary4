@@ -12,6 +12,8 @@ class Word < ApplicationRecord
   # Restore conditions after import is complete
   after_update :check_links #, if: :definition_changed?
 
+  scope :poetry_month, -> { where("EXTRACT(month FROM created_at) = ?", 4).order('created_at desc') }
+
   # TODO: Restore after launch; kills data import
   # after_create_commit {broadcast_prepend_to "words"}
   # after_update_commit {broadcast_replace_to "words"}

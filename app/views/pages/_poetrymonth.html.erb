@@ -1,0 +1,15 @@
+<% @words = Word.poetry_month.group_by { |w| [w.created_at.month, w.created_at.year] } %>
+
+<% @words.each do |letter,words| %>
+    <h3>April <%= letter[1]%></h3>
+    <h4><%= words.count %> <%= "Definition".pluralize(words.count) %></h4>
+    <dl class="idioglossia">
+      <% words.each do |word| %>
+          <dt><%= link_to word.full_word, word %></dt>
+          <dd>
+            <%= word.definition.html_safe %>
+          </dd>
+      <% end %>
+    </dl>
+<% end %>
+
