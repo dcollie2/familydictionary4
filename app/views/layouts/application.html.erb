@@ -44,7 +44,7 @@
               <% end %>
             </ul>
           </li>
-          <%= content_tag :li, link_to("Sign out", destroy_user_session_path, :method => :delete), class: 'nav-item' if user_signed_in? %>
+          <%= content_tag :li, link_to("Sign out", destroy_user_session_path, :method => :delete, class: 'nav-link'), class: 'nav-item' if user_signed_in? %>
         </ul>
       </div>
     </div>

@@ -1,5 +1,6 @@
 class WordsController < ApplicationController
   before_action :set_word, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :current, :show]
 
   # GET /words or /words.json
   def index
