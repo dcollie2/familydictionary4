@@ -12,29 +12,6 @@
 $link-color: #2795B6;
 
 
-
-.wordNav {
-  display: block;
-  width: 100%;
-  overflow: auto;
-  margin: 0 0 .5em 0;
-  .leftWord, .map, .rightWord { 
-    margin: 0;
-    width: 33%; 
-    float: left;
-  };
-  .leftWord {
-  }
-  .map {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
-  .rightWord {
-    text-align: right;
-  }
-}
-
 // Typography
 @font-face {
     font-family: 'FultonMarkersLight';
@@ -99,29 +76,9 @@ text {
 
 
 //Navigations -- Site
-#siteNav li {
- list-style: none;
- padding: 5px 0 5px 10px;
-}
 
-#siteNav li.last {
- border-bottom: none;
-}
-
-#siteNav li {
- border-bottom: 1px solid #ED9F9F;
- &:hover { background-color: #999999; color: #FFFFFF; }
-}
-
-#siteNav a {
-  text-decoration: none;
-  span {
-    padding-left: 10px;
-    padding-top: 10px;
+#mainNav a {
     font-family: GoudyBookletter;
-    font-size: 18px;
-    color: black;
-  }
 }
 
 // Navigations -- Letters
@@ -225,9 +182,6 @@ a.pointer span.word-nav-label {
     p {
       padding-left: 0;
     }
-    .phonetic {
-    	font-size: 24px;
-    }
 //    border-left: 1px dotted black;
   	border-top: 1px dotted black;
   //	margin: 50px 0 0px 40px;
@@ -303,7 +257,6 @@ section#vocabulary {
     }
   }
 }
-
 
 #definition {
   ul {

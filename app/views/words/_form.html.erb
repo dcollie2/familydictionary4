@@ -11,46 +11,55 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :prefix %>
-    <%= form.text_field :prefix %>
-  </div>
+  <div class="card">
+    <div class="card-body">
 
-  <div class="field">
-    <%= form.label :word %>
-    <%= form.text_field :word %>
-  </div>
+      <div class="form-group mb-3">
+        <%= form.label :prefix, class: 'form-label' %>
+        <%= form.text_field :prefix, class: 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :definition %>
-    <%= form.text_area :definition %>
-  </div>
+      <div class="form-group mb-3">
+        <%= form.label :word, class: 'form-label' %>
+        <%= form.text_field :word, class: 'form-control', rows: 3 %>
+      </div>
 
-  <div class="field">
-    <%= form.label :phonetic %>
-    <%= form.text_field :phonetic %>
-  </div>
+      <div class="form-group mb-3">
+        <%= form.label :definition, class: 'form-label' %>
+        <%= form.text_area :definition, class: 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :syllables %>
-    <%= form.text_field :syllables %>
-  </div>
+      <div class="form-group mb-3">
+        <%= form.label :phonetic, class: 'form-label' %>
+        <%= form.text_field :phonetic, class: 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :audio %>
-    <%= form.file_field :audio %>
-  </div>
-  <div class="field">
-    <%= form.label :slug %>
-    <%= form.text_field :slug %>
-  </div>
+      <div class="form-group mb-3">
+        <%= form.label :syllables, class: 'form-label' %>
+        <%= form.text_field :syllables, class: 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :also_matches %>
-    <%= form.text_field :also_matches %>
-  </div>
+      <div class="form-group mb-3">
+        <%= form.label :audio, class: 'form-label' %>
+        <%= form.file_field :audio, class: 'form-control' %>
+      </div>
+      <div class="form-group mb-3">
+        <%= form.label :slug, class: 'form-label' %>
+        <%= form.text_field :slug, class: 'form-control' %>
+      </div>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="form-group mb-3">
+        <%= form.label :also_matches, class: 'form-label' %>
+        <%= form.text_field :also_matches, class: 'form-control' %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit 'Update Word', class: 'btn btn-primary' %>
+<!--        <%#= link_to 'Show', @word, class: '' %> |-->
+        <%= link_to 'Back', words_path, class: 'btn btn-secondary' if @word.new_record? %>
+        <%= link_to 'Back', word_path(@word), class: 'btn btn-secondary' unless @word.new_record? %>
+      </div>
+
+    </div>
   </div>
 <% end %>
