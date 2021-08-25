@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_action :set_page, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index, :page_by_name, :show]
+  before_action :authenticate_user!, except: [:page_by_name, :show]
 
   # GET /pages or /pages.json
   def index
@@ -65,7 +65,7 @@ class PagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = Page.find(params[:id])
+      @page = Page.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

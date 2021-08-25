@@ -1,27 +1,26 @@
 <% title @word.word %>
 <% description @word.definition %>
+<div class="row border-bottom">
+  <div class="col-sm">
+    <%= link_to "<em>&lt;</em><span class='word-nav-label'>#{@word.prior_by_date.full_word}</span>".html_safe, word_url(@word.prior_by_date), :class => "pointer left" if @word.prior_by_date.present? %>
+  </div>
+  <div class="col-sm text-center">
+    <button class="btn btn-standard" id="mapModalButton" data-bs-toggle="modal" data-bs-target="#mapModal"><i class="bi bi-globe2"></i> Map</button>
+  </div>
+  <div class="col-sm">
+    <%= link_to "<span class='word-nav-label'>#{@word.next_by_date.full_word}</span><em>&gt;</em>".html_safe, word_path(@word.next_by_date), :class => "pointer float-end" if @word.next_by_date.present? %>
+  </div>
+</div>
 
 <article class="word">
-  <div class="definition fs-1 pb-3">
+  <div class="definition fs-2 pb-3">
     <h1><%= "#{@word.prefix} " unless @word.prefix.blank? %><%=h @word.word %></h1>
-    <%= content_tag :h2, "/#{@word.phonetic.html_safe}/  #{@word.syllables}", class: 'fs-4 text-muted fst-italic' unless (@word.syllables.blank? && @word.phonetic.blank?) %>
-    <%#= linkTerms(@word.definition) %>
-    <div class="m-4">
-      <%= @word.definition %>
+    <%= content_tag :h2, "/#{@word.phonetic}/  #{@word.syllables}".html_safe, class: 'fs-5 text-muted fst-italic' unless (@word.syllables.blank? && @word.phonetic.blank?) %>
+    <div class="m-4" id="definition-text">
+      <%= linkTerms(@word) %>
     </div>
   </div>
   <% if user_signed_in? %><p><%= link_to "Edit", edit_word_path(@word) %> <%= link_to "Destroy", @word, :method => :delete, :data => { :confirm => 'Are you sure?' } %></p><% end %>
-    <div class="row">
-      <div class="col-sm">
-        <%= link_to "<em>&lt;</em><span class='word-nav-label'>#{@word.prior_by_date.full_word}</span>".html_safe, word_url(@word.prior_by_date), :class => "pointer left" if @word.prior_by_date.present? %>
-      </div>
-      <div class="col-sm text-center">
-        <button class="btn btn-outline-secondary" id="mapModalButton" data-bs-toggle="modal" data-bs-target="#mapModal">Map</button>
-      </div>
-      <div class="col-sm">
-        <%= link_to "<span class='word-nav-label'>#{@word.next_by_date.full_word}</span><em>&gt;</em>".html_safe, word_path(@word.next_by_date), :class => "pointer float-end" if @word.next_by_date.present? %>
-      </div>
-    </div>
 
     <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="wordMap" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -57,8 +56,7 @@
     </div>
 
 
-  <section id='definition-utilities' class="mt-5">
-    <%= audio_tag url_for(@word.audio), controls: true, preload: "none" if @word.audio.present? %>
+  <section id='definition-utilities' class="mt-2">
     <ul id="reference-list">
       <li>See also:</li>
       <li><a href="http://www.onelook.com/?w=<%= @word.word %>&amp;ls=b" target="_blank">Onelook</a></li>
@@ -68,6 +66,12 @@
       <li><a href="http://wordsmith.org/anagram/anagram.cgi?anagram=<%= @word.word %>" target="_blank">Anagrams</a></li>
       <li><a href="http://www.flickr.com/search/?q=<%= @word.word.downcase %>&amp;z=e" target="_blank">Flickr</a></li>
     </ul>
+
+    <div class="row row-cols-2 border-top">
+      <div class="col">
+        <%= audio_tag url_for(@word.audio), controls: true, preload: "none", class: 'mt-3' if @word.audio.present? %>
+      </div>
+      <div class="col">
     <div class="word-map">
       <script type="text/javascript">
           var width = 370,
@@ -163,6 +167,7 @@
               }
           });
       </script>
+    </div>
     </div>
     <div id="images">
       <ul id="cbox"></ul>

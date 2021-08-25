@@ -1,3 +1,6 @@
+<% title @page.title %>
+
+<h1 class="mt-4 mb-5"><%= yield :title %></h1>
 <%= @page.contents %>
 
 <% if %w[map advice poetrymonth manuscript].include?(@page.permalink) %>
@@ -21,7 +24,7 @@
           <ul>
             <% word.also_matches.split(' ').each do |item| %>
               <li>
-                <% if definition_words.include?(item.downcase) %>
+                <% if (definition_words & (item)).present? %>
                   <strong><%= item %></strong>
                 <% else %>
                   <%= item %>

@@ -1,0 +1,12 @@
+<tr>
+  <td>
+    <%= word_stats[1] -%>
+  </td>
+  <td>
+    <% if link_back(word_stats[0]) %>
+    	<%= link_to word_stats[0], "words/#{word_stats[0]}" -%>
+    <% else %>
+    	<%= word_stats[0] %>
+    <% end %>
+  </td>
+</tr>

@@ -1,25 +1,21 @@
-<main>
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <% title "Idioglossia" %>
-        <h1 class="fw-light"><%= yield :title %></h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <% if current_user %>
-          <p><%= link_to "New Word", new_word_path %></p>
-        <% end %>
+<% title "Idioglossia" %>
+<h1 class="fw-light"><%= yield :title %></h1>
+<p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+<% if current_user %>
+  <p><%= link_to "New Word", new_word_path %></p>
+<% end %>
 
-        <% @words.group_by(&:first_letter).sort.each do |letter,words| %>
-          <h3 class="letter-header fs-4"><a name="<%= letter %>"><%= letter %></a></h3>
-          <div class="idioglossia">
-            <% words.each do |word| %>
-              <div class="definition">
-                <%= turbo_stream_from "words" %>
-                <%= turbo_frame_tag "words" do %>
-                  <%= render words %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
+<% @words.group_by(&:first_letter).sort.each do |letter,words| %>
+  <h3 class="letter-header fs-4"><a name="<%= letter %>"><%= letter %></a></h3>
+  <div class="idioglossia">
+    <% words.each do |word| %>
+      <div class="definition">
+        <%= turbo_stream_from "words" %>
+        <%= turbo_frame_tag "words" do %>
+          <%= render words %>
         <% end %>
-        <%= turbo_frame_tag 'new_word' %>
       </div>
-</main>
+    <% end %>
+  </div>
+<% end %>
+<%= turbo_frame_tag 'new_word' %>

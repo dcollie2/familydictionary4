@@ -42,6 +42,18 @@ namespace :import do
     end
   end
 
+  task :pages => :environment do
+    include ActionView::Helpers::TextHelper
+    CSV.foreach("docs/tmp_migration/pages_export.csv", :headers => true, liberal_parsing: {double_quote_outside_quote: true}) do |row|
+      record = row.to_hash.symbolize_keys.except!(:id)
+      new_page = Page.find_or_create_by(permalink: record[:permalink], title: record[:title])
+      new_page.update(contents: simple_format(record[:contents]))
+      puts record.inspect
+      puts '------'
+
+    end
+  end
+
   task :reset => :environment do
     Word.destroy_all
   end

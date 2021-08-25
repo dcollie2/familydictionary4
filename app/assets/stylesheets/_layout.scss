@@ -48,7 +48,9 @@ h1, h2, h3, h4, h5, h6 {
 //  font-weight: bold;
 //}
 
-
+#subHead {
+  background-color: #E0C9A6
+}
 #subtitle {
   font-family: "FultonMarkersLight";
 }
@@ -73,14 +75,20 @@ text {
     pointer-events: none;
   }
 
-
-
-//Navigations -- Site
-
-#mainNav a {
-    font-family: GoudyBookletter;
+html, main {
+  background-color: #F9FBFF;
 }
 
+//Navigations -- Site
+#navBar {
+  background-color: #083050;
+}
+#mainNav a {
+  font-family: GoudyBookletter;
+}
+.navbar-brand {
+  font-family: GoudyBookletter
+}
 // Navigations -- Letters
 #letterNav {	
  padding-left: cp(20, 331);
@@ -128,66 +136,6 @@ a.pointer span.word-nav-label {
   border-bottom: 1px dotted black;
 }
 
-// Page
-.container .contents {
-  padding: 20px percentage(24px / 650px);
-  p {
-    padding: 0 0 1em 0;
-     a {
-      color: $link-color;
-      text-decoration: none;    
-    }
-  }
-  dl a {
-    color: $link-color;
-    text-decoration: none;    
-  }
-  
-  ul {
-    list-style: disc;
-    margin-bottom: 1em;
-    li {
-      display: list-item;
-      margin: 0 0 .25em 2em;
-       a {
-        color: $link-color;
-        text-decoration: none;    
-      }
-    }
-  }
-}
-
-// Word
-.container article {
-  padding: 20px percentage(24px / 650px);
-  h1 {
-    font-size: 1.5em; /* 24px / 16px */
-    font-weight: bold;
-  	//border-bottom: 1px dotted black;
-  	a {
-  		color: black;
-  	}
-  }
-  p {
-    padding-left: percentage(24px / 650px);    
-  }
-  a {
-    color: $link-color;
-    text-decoration: none;
-  }
-  aside {
-    h1 {
-      font: normal 100% Baskerville, “Times New Roman”, Times, serif;
-    }
-    p {
-      padding-left: 0;
-    }
-//    border-left: 1px dotted black;
-  	border-top: 1px dotted black;
-  //	margin: 50px 0 0px 40px;
-    padding: 20px percentage(24px / 650px);
-  }
-}
 
 
 div.word-map {
@@ -201,15 +149,6 @@ div#images {
   width: 50%;
 }
 
-div#pronounce {
-	margin-top: 30px;
-}
-
-audio {
-  width: 100%;
-	background: gray;
-	opacity: 0.25;
-}
 
 // Photos
 ul#cbox {
@@ -224,7 +163,7 @@ ul#cbox li {
 // Reference List
 ul#reference-list {
   li {
-    display: inline;    
+    display: inline;
     width: auto;
   }
 }
@@ -257,6 +196,7 @@ section#vocabulary {
     }
   }
 }
+
 
 #definition {
   ul {
@@ -303,16 +243,13 @@ section#vocabulary {
 
 // Quiz format
 ol.quiz {
-  list-style-type: decimal;
-  margin: 30px 0 0 25px;
   li {
     font-weight: bold;
   }
   ol {
-    list-style-type: lower-alpha; margin: 5px 0 20px 25px;
+    list-style-type: lower-alpha;
     li {
       font-weight: normal;
-      margin: 10px;
     }
   }
 }
@@ -321,3 +258,6 @@ ol.quiz {
   display: block;
 }
 
+a.termLink, .termLink:visited, .termlink:active  {
+  color: $link-color;
+}
