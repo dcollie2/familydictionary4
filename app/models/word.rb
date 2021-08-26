@@ -102,7 +102,6 @@ class Word < ApplicationRecord
         matched_word = Word.where(slug: match).first
         if matched_word.blank?
           matched_word = Word.where(":words = ANY (also_matches)", words: match).first
-          puts("ALT MATCH on #{word}!!!") if matched_word.present?
         end
         unless matched_word.blank?
           # find or create because also_matches can contain duplicates
