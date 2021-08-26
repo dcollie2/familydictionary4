@@ -1,4 +1,5 @@
 const { environment } = require('@rails/webpacker')
+environment.loaders.delete('nodeModules')
 const webpack = require('webpack')
 // Adds `var jQuery = require('jquery') to legacy jQuery plugins
 environment.plugins.append(
