@@ -2,7 +2,6 @@
   "name": "familydictionary4",
   "private": true,
   "dependencies": {
-    "@babel/plugin-proposal-private-methods": "^7.14.5",
     "@hotwired/turbo-rails": "^7.0.0-rc.2",
     "@popperjs/core": "^2.9.3",
     "@rails/actioncable": "^6.1.4",
@@ -14,9 +13,7 @@
     "bootstrap-icons": "^1.5.0",
     "jquery": "^3.6.0",
     "stimulus": "^2.0.0",
-    "trix": "^1.2.0",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12"
+    "trix": "^1.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {

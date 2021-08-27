@@ -6,7 +6,7 @@
       <%= link_to "<em>&lt;</em><span class='word-nav-label'>#{@word.prior_by_date.full_word}</span>".html_safe, word_url(@word.prior_by_date), :class => "pointer left" if @word.prior_by_date.present? %>
     </div>
     <div class="col-sm text-sm-center">
-      <button class="btn btn-standard" id="mapModalButton" data-bs-toggle="modal" data-bs-target="#mapModal"><i class="bi bi-globe2"></i> Map</button>
+      <button class="btn btn-standard" id="mapModalButton" data-bs-toggle="modal" data-bs-target="#mapModal"><%= icon("globe2") %> Map</button>
     </div>
     <div class="col-sm text-sm-right">
       <%= link_to "<span class='word-nav-label'>#{@word.next_by_date.full_word}</span><em>&gt;</em>".html_safe, word_path(@word.next_by_date), :class => "pointer float-sm-end" if @word.next_by_date.present? %>
