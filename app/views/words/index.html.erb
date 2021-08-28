@@ -6,13 +6,13 @@
 <% end %>
 
 <% @words.group_by(&:first_letter).sort.each do |letter,words| %>
-  <h3 class="letter-header fs-4"><a name="<%= letter %>"><%= letter %></a></h3>
+  <h3 class="letter-header fs-4"><a name="<%= letter.upcase %>"><%= letter.upcase %></a></h3>
   <div class="idioglossia">
     <% words.each do |word| %>
       <div class="definition">
         <%= turbo_stream_from "words" %>
         <%= turbo_frame_tag "words" do %>
-          <%= render words %>
+          <%= render word %>
         <% end %>
       </div>
     <% end %>
