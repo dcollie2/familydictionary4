@@ -17,4 +17,5 @@ test:
 
 production:
   <<: *default
-  database: familydictionary4_production
+  url: <%= ENV["DATABASE_URL"] %>
+  pool: 15
