@@ -17,5 +17,4 @@ import "bootstrap"
 import "../stylesheets/application"
 import "controllers"
 import "channels"
-import 'bootstrap/scss/bootstrap.css'
 // import 'bootstrap-icons/font/bootstrap-icons.css'
