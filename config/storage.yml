@@ -23,8 +23,7 @@ amazon_prod:
   region: <%= Rails.application.credentials.aws[:region] %>
   bucket: <%= Rails.application.credentials.aws[:prod][:bucket] %>
 
-
-#  service: S3
+ #  service: S3
 #  access_key_id: <%#= Rails.application.credentials.dig(:aws, :access_key_id) %>
 #  secret_access_key: <%#= Rails.application.credentials.dig(:aws, :secret_access_key) %>
 #  region: us-east-1
