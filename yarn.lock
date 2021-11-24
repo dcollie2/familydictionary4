@@ -895,18 +895,18 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
-"@hotwired/turbo-rails@^7.0.0-rc.2":
-  version "7.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.0.0-rc.2.tgz#8d358c750e6df9c0ec81059217ec7e02e23d024f"
-  integrity sha512-YqLEtGtIWE1/ATCT7+3Rviid6rl7T4Yw661TfVHZFox5IHxhZigXp02rIifZjHqoK6Pk/aCoLtmNlgG04Nblng==
+"@hotwired/turbo-rails@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.1.0.tgz#63df3f0e11aea7c451983266c80ad8896f310952"
+  integrity sha512-eB/PTZQYl7dPm51AfBwm0sBpohJ7eir/JmuOfwJG297lEEA8sFcvpxVON/87Ne97OyAOcORZtLpX0KB+t9afyw==
   dependencies:
-    "@hotwired/turbo" "^7.0.0-rc.2"
+    "@hotwired/turbo" "^7.1.0"
     "@rails/actioncable" "^6.0.0"
 
-"@hotwired/turbo@^7.0.0-rc.2":
-  version "7.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.0.0-rc.2.tgz#13acc4e9e8468cb3b04becc09c799b88d9302177"
-  integrity sha512-6RZx6LBAU9+lytUXgY9E2OhBajYrXBltIVJiSMRpmyRhAjfzFFgud9LJTZ5nzU4rrVTGTUkphdtJy1ZAPfaS9Q==
+"@hotwired/turbo@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.1.0.tgz#27e44e0e3dc5bd1d4bda0766d579cf5a14091cd7"
+  integrity sha512-Q8kGjqwPqER+CtpQudbH+3Zgs2X4zb6pBAlr6NsKTXadg45pAOvxI9i4QpuHbwSzR2+x87HUm+rot9F/Pe8rxA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
