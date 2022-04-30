@@ -11,8 +11,10 @@ import "channels"
 Rails.start()
 ActiveStorage.start()
 require("jquery")
-require("trix")
-require("@rails/actiontext")
+import "trix"
+import "@rails/actiontext"
+// require("trix")
+// require("@rails/actiontext")
 import "bootstrap"
 import "../stylesheets/application"
 import "controllers"
