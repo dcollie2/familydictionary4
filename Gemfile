@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 7.0.2.4'
+gem 'rails', '~> 7.0.4'
 # Use postgres as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -14,11 +14,9 @@ gem 'sass-rails', '>= 6'
 # hotwire for messaging
 gem 'hotwire-rails'
 # sprockets is now optional
-# gem "sprockets-rails"
+gem "sprockets-rails"
 # Turbo for interactivity without page refresh
 gem 'turbo-rails'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
@@ -71,3 +69,5 @@ gem "friendly_id", "~> 5.4"
 gem "devise", "~> 4.8"
 
 gem "airbrake"
+
+gem "importmap-rails", "~> 1.0"

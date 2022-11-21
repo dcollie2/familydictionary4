@@ -74,107 +74,107 @@
         <%= audio_tag url_for(@word.audio), controls: true, preload: "none", class: 'mt-3' if @word.audio.present? %>
       </div>
       <div class="col">
-    <div class="word-map">
-      <script type="text/javascript">
-          var width = 370,
-              height = 300,
-              distance = 50,
-              charge = -3000,
-              gravity = 2.2
+        <div class="word-map">
+          <script type="text/javascript">
+              var width = 370,
+                  height = 300,
+                  distance = 50,
+                  charge = -3000,
+                  gravity = 2.2
 
-          d3.json("../citations.json?word=<%= @word.slug.downcase -%>", function(error, links) {
-              console.log(links);
-              var nodes = {};
+              d3.json("../citations.json?word=<%= @word.slug.downcase -%>", function(error, links) {
+                  console.log(links);
+                  var nodes = {};
 
-              // Compute the distinct nodes from the links.
-              links.forEach(function(link) {
-                  link.source = nodes[link.source] ||
-                      (nodes[link.source] = {name: link.source});
-                  link.target = nodes[link.target] ||
-                      (nodes[link.target] = {name: link.target});
-                  link.value = +link.value;
-              });
-
-                if (links.length == 0) {
-                    nodes = Object.create(null);
-                    nodes = Object.create(nodes, {
-                    <%= escape_javascript(@word.slug) %>: {
-                        'index': 1,
-                        'name': '<%= @word.word %>'
-                    }
-                });
-              };
-              console.log(nodes);
-
-              var force = d3.layout.force()
-                  .nodes(d3.values(nodes))
-                  .links(links)
-                  .size([width, height])
-                  .linkDistance(distance)
-                  .charge(charge)
-                  .gravity(gravity)
-                  .on("tick", tick)
-                  .start();
-
-              var svg = d3.select(".word-map").append("svg").attr("width", width).attr("height", height);
-
-              // add the links
-              var path = svg.append("svg:g").selectAll("path")
-                  .data(force.links())
-                  .enter().append("svg:path")
-                  .attr("class", "link");
-
-              // define the nodes
-              var node = svg.selectAll(".node")
-                  .data(force.nodes())
-                  .enter().append("a")
-                  .attr("xlink:href", function(d) {return "/words/" + d.name})
-                  .attr("class", "node")
-                  .call(force.drag);
-
-              if (links.length == 0) {
-                  var message = svg.append("a").attr("xlink:href", function(d) {return "/words/" + "<%= @word.word.downcase %>"}).attr("class", "node");
-
-                  message.append("circle").attr("cx", 150).attr("cy", 150).attr("r", 10);
-                  message.append("text").attr("x", 165).attr("dy", ".35em").text("<%= @word.word %>").attr("y", 150);
-              };
-
-              // add the nodes
-              node.append("circle")
-                  .attr("r", 10);
-
-              // add the text
-              node.append("text")
-                  .attr("x", 12)
-                  .attr("dy", ".35em")
-                  .text(function(d) { return d.name; });
-
-              // add the curvy lines
-              function tick() {
-                  path.attr("d", function(d) {
-                      var dx = d.target.x - d.source.x,
-                          dy = d.target.y - d.source.y,
-                          dr = Math.sqrt(dx * dx + dy * dy);
-                      return "M" +
-                          d.source.x + "," +
-                          d.source.y + "A" +
-                          dr + "," + dr + " 0 0,1 " +
-                          d.target.x + "," +
-                          d.target.y;
+                  // Compute the distinct nodes from the links.
+                  links.forEach(function(link) {
+                      link.source = nodes[link.source] ||
+                          (nodes[link.source] = {name: link.source});
+                      link.target = nodes[link.target] ||
+                          (nodes[link.target] = {name: link.target});
+                      link.value = +link.value;
                   });
 
-                  node
-                      .attr("transform", function(d) {
-                          return "translate(" + d.x + "," + d.y + ")"; });
-              }
-          });
-      </script>
-    </div>
+                    if (links.length == 0) {
+                        nodes = Object.create(null);
+                        nodes = Object.create(nodes, {
+                        <%= escape_javascript(@word.slug) %>: {
+                            'index': 1,
+                            'name': '<%= @word.word %>'
+                        }
+                    });
+                  };
+                  console.log(nodes);
+
+                  var force = d3.layout.force()
+                      .nodes(d3.values(nodes))
+                      .links(links)
+                      .size([width, height])
+                      .linkDistance(distance)
+                      .charge(charge)
+                      .gravity(gravity)
+                      .on("tick", tick)
+                      .start();
+
+                  var svg = d3.select(".word-map").append("svg").attr("width", width).attr("height", height);
+
+                  // add the links
+                  var path = svg.append("svg:g").selectAll("path")
+                      .data(force.links())
+                      .enter().append("svg:path")
+                      .attr("class", "link");
+
+                  // define the nodes
+                  var node = svg.selectAll(".node")
+                      .data(force.nodes())
+                      .enter().append("a")
+                      .attr("xlink:href", function(d) {return "/words/" + d.name})
+                      .attr("class", "node")
+                      .call(force.drag);
+
+                  if (links.length == 0) {
+                      var message = svg.append("a").attr("xlink:href", function(d) {return "/words/" + "<%= @word.word.downcase %>"}).attr("class", "node");
+
+                      message.append("circle").attr("cx", 150).attr("cy", 150).attr("r", 10);
+                      message.append("text").attr("x", 165).attr("dy", ".35em").text("<%= @word.word %>").attr("y", 150);
+                  };
+
+                  // add the nodes
+                  node.append("circle")
+                      .attr("r", 10);
+
+                  // add the text
+                  node.append("text")
+                      .attr("x", 12)
+                      .attr("dy", ".35em")
+                      .text(function(d) { return d.name; });
+
+                  // add the curvy lines
+                  function tick() {
+                      path.attr("d", function(d) {
+                          var dx = d.target.x - d.source.x,
+                              dy = d.target.y - d.source.y,
+                              dr = Math.sqrt(dx * dx + dy * dy);
+                          return "M" +
+                              d.source.x + "," +
+                              d.source.y + "A" +
+                              dr + "," + dr + " 0 0,1 " +
+                              d.target.x + "," +
+                              d.target.y;
+                      });
+
+                      node
+                          .attr("transform", function(d) {
+                              return "translate(" + d.x + "," + d.y + ")"; });
+                  }
+              });
+          </script>
+        </div>
     </div>
     <div id="images">
       <ul id="cbox"></ul>
     </div>
-
+    </div>
 <!--    <p class="subscribe"><a href="http://feeds.feedburner.com/AnAbbreviatedFamilyDictionary"><%#= image_tag "feed-icon-14x14.png", :alt => "Subscribe to An Abbreviated Family Dictionary via RSS Feed" %> Subscribe to the Dictionary</a></p>-->
 
   </section>
