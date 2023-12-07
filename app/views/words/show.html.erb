@@ -83,7 +83,6 @@
                   gravity = 2.2
 
               d3.json("../citations.json?word=<%= @word.slug.downcase -%>", function(error, links) {
-                  console.log(links);
                   var nodes = {};
 
                   // Compute the distinct nodes from the links.
@@ -104,7 +103,6 @@
                         }
                     });
                   };
-                  console.log(nodes);
 
                   var force = d3.layout.force()
                       .nodes(d3.values(nodes))
