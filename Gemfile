@@ -10,12 +10,11 @@ gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 6.3.1'
 # Use SCSS for stylesheets
-# gem 'sass-rails', '>= 6'
-gem 'sassc-rails'
+gem 'sass-rails', '>= 6'
 # hotwire for messaging
 gem 'hotwire-rails'
 # sprockets is now optional
-gem "sprockets-rails"
+gem "sprockets"
 # Turbo for interactivity without page refresh
 gem 'turbo-rails'
 gem 'stimulus-rails'
@@ -74,3 +73,5 @@ gem "devise", "~> 4.8"
 gem "airbrake"
 
 gem "importmap-rails", "~> 1.0"
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
