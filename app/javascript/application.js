@@ -2,4 +2,4 @@
 import "popper"
 import "bootstrap"
 
-import "@rails/actiontext"
+//= require @rails/actiontext
