@@ -15,7 +15,7 @@
 #   https://github.com/evilmartians/fullstaq-ruby-docker.
 #
 # We recommend using the highest patch level for better security and
-# performance.
+# performance. s
 
 ARG RUBY_VERSION=3.3.5
 ARG VARIANT=jemalloc-slim
