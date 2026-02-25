@@ -141,6 +141,7 @@ GEM
     erb (5.0.1)
     erubi (1.13.1)
     ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     globalid (1.2.1)
@@ -194,6 +195,8 @@ GEM
     nio4r (2.7.4)
     nokogiri (1.18.8-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-linux-gnu)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.5.9)
     popper_js (2.11.8)
@@ -207,7 +210,7 @@ GEM
     puma (6.6.0)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.1.16)
+    rack (3.1.18)
     rack-mini-profiler (4.0.0)
       rack (>= 1.2.0)
     rack-session (2.1.1)
@@ -322,6 +325,7 @@ GEM
 PLATFORMS
   arm64-darwin-22
   arm64-darwin-23
+  x86_64-linux
 
 DEPENDENCIES
   airbrake
