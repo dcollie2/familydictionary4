@@ -8,6 +8,7 @@ primary_region = "iad"
 
 [env]
   PORT = "3000"
+  BINDING = "0.0.0.0"
 
 [http_service]
   internal_port = 3000

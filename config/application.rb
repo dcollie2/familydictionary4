@@ -23,5 +23,8 @@ module Familydictionary4
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Disable image variant processing (image_processing gem not installed)
+    config.active_storage.variant_processor = :disabled
   end
 end
